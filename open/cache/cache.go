@@ -2,6 +2,7 @@ package cache
 
 import "time"
 
+
 //Cache interface
 type Cache interface {
 	Get(key string) interface{}

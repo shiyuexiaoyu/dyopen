@@ -5,9 +5,9 @@ import (
 	"fmt"
 	"net/url"
 
-	"github.com/amorist/douyin/open/context"
-	"github.com/amorist/douyin/open/credential"
-	"github.com/amorist/douyin/util"
+	"github.com/shiyuexiaoyu/dyopen/open/context"
+	"github.com/shiyuexiaoyu/dyopen/open/credential"
+	"github.com/shiyuexiaoyu/dyopen/util"
 )
 
 const (
