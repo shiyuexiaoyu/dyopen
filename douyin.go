@@ -6,6 +6,8 @@ import (
 	"github.com/amorist/douyin/open/config"
 )
 
+// test
+
 // Douyin .
 type Douyin struct {
 	cache cache.Cache
