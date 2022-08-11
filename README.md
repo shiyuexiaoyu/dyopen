@@ -1,3 +1,6 @@
+## 说明
+本项目来自 amorist/douyin，主要用着个人号数据统计这块
+
 ## Usage 示例
 
 ```go
@@ -28,4 +31,3 @@ url := oauth.GetRedirectURL("amor")
 3. 通过access_token进行接口调用，获取用户基本信息及其他操作等。可以根据您的需求，选择OpenAPi的接口接入。
 
 
-感谢 `amor-ist`
