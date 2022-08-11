@@ -6,6 +6,7 @@ import (
 	gocache "github.com/patrickmn/go-cache"
 )
 
+
 // MemCache memory cache.
 type MemCache struct {
 	c *gocache.Cache

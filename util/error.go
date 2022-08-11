@@ -6,6 +6,7 @@ type CommonError struct {
 	ErrMsg  string `json:"description"`
 }
 
+
 // CommonErrorExtra 抖音返回的错误额外信息.
 type CommonErrorExtra struct {
 	LogID string `json:"logid"`

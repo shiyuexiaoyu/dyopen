@@ -11,6 +11,7 @@ import (
 	"os"
 )
 
+
 // HTTPGet get 请求
 func HTTPGet(uri string) ([]byte, error) {
 	response, err := http.Get(uri)
