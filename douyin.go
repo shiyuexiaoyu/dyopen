@@ -1,9 +1,9 @@
 package douyin
 
 import (
-	"github.com/amorist/douyin/open"
-	"github.com/amorist/douyin/open/cache"
-	"github.com/amorist/douyin/open/config"
+	"github.com/shiyuexiaoyu/dyopen/open"
+	"github.com/shiyuexiaoyu/dyopen/open/cache"
+	"github.com/shiyuexiaoyu/dyopen/open/config"
 )
 
 // test

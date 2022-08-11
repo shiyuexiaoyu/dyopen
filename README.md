@@ -1,9 +1,3 @@
-# 抖音开放平台API (In progress)
-[![Go Report Card](https://goreportcard.com/badge/github.com/amorist/douyin)](https://goreportcard.com/report/github.com/amorist/douyin)
-
-## Docs 文档
-[![go.dev reference](https://img.shields.io/badge/go.dev-reference-007d9c?logo=go&logoColor=white&style=flat-square)](https://pkg.go.dev/github.com/amorist/douyin?tab=doc)
-
 ## Usage 示例
 
 ```go
@@ -33,6 +27,5 @@ url := oauth.GetRedirectURL("amor")
 
 3. 通过access_token进行接口调用，获取用户基本信息及其他操作等。可以根据您的需求，选择OpenAPi的接口接入。
 
-## Issue 如有问题，可以提issue或通过微信联系我
 
-加微信`amor-ist`备注`douyin api`.
+感谢 `amor-ist`

@@ -1,8 +1,8 @@
 package js
 
 import (
-	"github.com/amorist/douyin/open/context"
-	"github.com/amorist/douyin/open/credential"
+	"github.com/shiyuexiaoyu/dyopen/open/context"
+	"github.com/shiyuexiaoyu/dyopen/open/credential"
 )
 
 // Js struct

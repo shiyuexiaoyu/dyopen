@@ -1,17 +1,17 @@
 package open
 
 import (
-	"github.com/amorist/douyin/open/config"
-	"github.com/amorist/douyin/open/context"
-	"github.com/amorist/douyin/open/credential"
-	"github.com/amorist/douyin/open/enterprise"
-	"github.com/amorist/douyin/open/image"
-	"github.com/amorist/douyin/open/oauth"
-	"github.com/amorist/douyin/open/pay"
-	"github.com/amorist/douyin/open/poi"
-	"github.com/amorist/douyin/open/search"
-	"github.com/amorist/douyin/open/user"
-	"github.com/amorist/douyin/open/video"
+	"github.com/shiyuexiaoyu/dyopen/open/config"
+	"github.com/shiyuexiaoyu/dyopen/open/context"
+	"github.com/shiyuexiaoyu/dyopen/open/credential"
+	"github.com/shiyuexiaoyu/dyopen/open/enterprise"
+	"github.com/shiyuexiaoyu/dyopen/open/image"
+	"github.com/shiyuexiaoyu/dyopen/open/oauth"
+	"github.com/shiyuexiaoyu/dyopen/open/pay"
+	"github.com/shiyuexiaoyu/dyopen/open/poi"
+	"github.com/shiyuexiaoyu/dyopen/open/search"
+	"github.com/shiyuexiaoyu/dyopen/open/user"
+	"github.com/shiyuexiaoyu/dyopen/open/video"
 )
 
 //API 抖音开放平台API
