@@ -268,24 +268,24 @@ type ListInfo struct {
 	Cursor  int64 `json:"cursor"`
 	HasMore bool  `json:"has_more"`
 	List    []struct {
-		IsTop      bool   `json:"is_top"`
-		ItemID     string `json:"item_id"`
-		MediaType  int `json:"media_type"`
 		Statistics struct {
-			CommentCount  int32 `json:"comment_count"`
-			DiggCount     int32 `json:"digg_count"`
-			DownloadCount int32 `json:"download_count"`
-			ForwardCount  int32 `json:"forward_count"`
-			PlayCount     int32 `json:"play_count"`
-			ShareCount    int32 `json:"share_count"`
+			CommentCount  int `json:"comment_count"`
+			DiggCount     int `json:"digg_count"`
+			DownloadCount int `json:"download_count"`
+			ForwardCount  int `json:"forward_count"`
+			PlayCount     int `json:"play_count"`
+			ShareCount    int `json:"share_count"`
 		} `json:"statistics"`
-		VideoId     string `json:"video_id"`
-		VideoStatus int `json:"video_status"`
+		MediaType   int    `json:"media_type"`
+		ItemID      string `json:"item_id"`
+		Title       string `json:"title"`
 		Cover       string `json:"cover"`
+		IsTop       bool   `json:"is_top"`
 		CreateTime  int64  `json:"create_time"`
 		IsReviewed  bool   `json:"is_reviewed"`
+		VideoStatus int    `json:"video_status"`
+		VideoId     string `json:"video_id"`
 		ShareURL    string `json:"share_url"`
-		Title       string `json:"title"`
 	} `json:"list"`
 }
 
@@ -322,21 +322,24 @@ type DataInfo struct {
 	util.CommonError
 
 	List []struct {
-		Statistics struct {
-			CommentCount  int32 `json:"comment_count"`
-			DiggCount     int32 `json:"digg_count"`
-			DownloadCount int32 `json:"download_count"`
-			ForwardCount  int32 `json:"forward_count"`
-			PlayCount     int32 `json:"play_count"`
-			ShareCount    int32 `json:"share_count"`
+		VideoStatus int `json:"video_status"` //表示视频状态。2:不适宜公开;4:审核中;5:公开视频
+		Statistics  struct {
+			CommentCount  int `json:"comment_count"`
+			DiggCount     int `json:"digg_count"`
+			DownloadCount int `json:"download_count"`
+			ForwardCount  int `json:"forward_count"`
+			PlayCount     int `json:"play_count"`
+			ShareCount    int `json:"share_count"`
 		} `json:"statistics"`
 		Title      string `json:"title"`
-		Cover      string `json:"cover"`
-		CreateTime int64  `json:"create_time"`
-		IsReviewed bool   `json:"is_reviewed"`
+		Cover      string `json:"cover"` //视频封面
 		IsTop      bool   `json:"is_top"`
+		CreateTime int64  `json:"create_time"` //视频创建时间戳
 		ItemID     string `json:"item_id"`
+		IsReviewed bool   `json:"is_reviewed"` //表示是否审核结束。审核通过或者失败都会返回true，审核中返回false。
+		VideoId    string `json:"video_id"`
 		ShareURL   string `json:"share_url"`
+		MediaType  int    `json:"media_type"` // 媒体类型。2:图集;4:视频
 	} `json:"list"`
 }
 
