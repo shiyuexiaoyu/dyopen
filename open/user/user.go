@@ -9,7 +9,7 @@ import (
 )
 
 const (
-	userInfoURL      string = "https://open.douyin.com/oauth/oauth/userinfo?access_token=%s&open_id=%s"
+	userInfoURL      string = "https://open.douyin.com/oauth/userinfo?access_token=%s&open_id=%s"
 	fansListURL      string = "https://open.douyin.com/fans/list?access_token=%s&open_id=%s&cursor=%d&count=%d"
 	followingListURL string = "https://open.douyin.com/following/list?access_token=%s&open_id=%s&cursor=%d&count=%d"
 )
@@ -47,11 +47,7 @@ type userInfoRes struct {
 }
 
 // GetUserInfo 获取用户信息.
-func (user *User) GetUserInfo(openid string) (userInfo *Info, err error) {
-	accessToken, err := user.GetAccessToken(openid)
-	if err != nil {
-		return
-	}
+func (user *User) GetUserInfo(openid string, accessToken string) (userInfo *Info, err error) {
 	uri := fmt.Sprintf(userInfoURL, accessToken, openid)
 	var response []byte
 	response, err = util.HTTPGet(uri)
