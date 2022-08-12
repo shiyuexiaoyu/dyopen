@@ -57,11 +57,7 @@ type uploadVideoRes struct {
 
 // Upload 视频上传.
 // refer: https://open.douyin.com/platform/doc/6848798087398295555
-func (video *Video) Upload(openid, filename string) (videoInfo Info, err error) {
-	accessToken, err := video.GetAccessToken(openid)
-	if err != nil {
-		return
-	}
+func (video *Video) Upload(openid,accessToken string, filename string) (videoInfo Info, err error) {
 
 	uri := fmt.Sprintf(videoUploadURL, accessToken, openid)
 	var response []byte
@@ -97,11 +93,7 @@ type partInfoRes struct {
 
 // PartInit 初始化分片上传.
 // refer: https://open.douyin.com/platform/doc/6848798087398393859
-func (video *Video) PartInit(openid string) (partInfo PartInfo, err error) {
-	accessToken, err := video.GetAccessToken(openid)
-	if err != nil {
-		return
-	}
+func (video *Video) PartInit(openid string,accessToken string) (partInfo PartInfo, err error) {
 
 	uri := fmt.Sprintf(videoPartInitURL, accessToken, openid)
 	var response []byte
@@ -130,11 +122,7 @@ type partVideoRes struct {
 
 // PartUpload 视频分片上传.
 // refer: https://open.douyin.com/platform/doc/6848798087226460172
-func (video *Video) PartUpload(openid, uploadid string, partNumber int64, filename string) (err error) {
-	accessToken, err := video.GetAccessToken(openid)
-	if err != nil {
-		return
-	}
+func (video *Video) PartUpload(openid,accessToken string, uploadid string, partNumber int64, filename string) (err error) {
 
 	uri := fmt.Sprintf(videoPartUploadURL, accessToken, openid)
 
@@ -158,11 +146,7 @@ func (video *Video) PartUpload(openid, uploadid string, partNumber int64, filena
 
 // PartComplete 视频分片完成上传.
 // refer: https://open.douyin.com/platform/doc/6848798087398361091
-func (video *Video) PartComplete(openid, uploadid string) (videoInfo Info, err error) {
-	accessToken, err := video.GetAccessToken(openid)
-	if err != nil {
-		return
-	}
+func (video *Video) PartComplete(openid,accessToken string, uploadid string) (videoInfo Info, err error) {
 
 	uri := fmt.Sprintf(videoPartCompleteURL, accessToken, openid, uploadid)
 	var response []byte
@@ -217,11 +201,7 @@ type createRes struct {
 
 // Create 视频创建.
 // refer: https://open.douyin.com/platform/doc/6848798087398328323
-func (video *Video) Create(openid string, videoInfo *CreateVideoReq) (info CreateInfo, err error) {
-	accessToken, err := video.GetAccessToken(openid)
-	if err != nil {
-		return
-	}
+func (video *Video) Create(openid string,accessToken string, videoInfo *CreateVideoReq) (info CreateInfo, err error) {
 
 	uri := fmt.Sprintf(videoCreateURL, accessToken, openid)
 	var response []byte
@@ -254,11 +234,7 @@ type deleteVideoRes struct {
 
 // Delete 视频删除
 // refer: https://open.douyin.com/platform/doc/6848806536383383560#url
-func (video *Video) Delete(openid, itemid string) (err error) {
-	accessToken, err := video.GetAccessToken(openid)
-	if err != nil {
-		return
-	}
+func (video *Video) Delete(openid,accessToken string, itemid string) (err error) {
 
 	uri := fmt.Sprintf(videoCreateURL, accessToken, openid)
 
@@ -316,11 +292,7 @@ type listInfoRes struct {
 }
 
 // List .
-func (video *Video) List(openid string, cursor, count int64) (info *ListInfo, err error) {
-	accessToken, err := video.GetAccessToken(openid)
-	if err != nil {
-		return
-	}
+func (video *Video) List(openid string,accessToken string, cursor, count int64) (info *ListInfo, err error) {
 	uri := fmt.Sprintf(videoListURL, accessToken, openid, cursor, count)
 	var response []byte
 	response, err = util.HTTPGet(uri)
@@ -374,11 +346,7 @@ type dataInfoRes struct {
 }
 
 // Data .
-func (video *Video) Data(openid string, itemIDS []string) (info *DataInfo, err error) {
-	accessToken, err := video.GetAccessToken(openid)
-	if err != nil {
-		return
-	}
+func (video *Video) Data(openid string,accessToken string, itemIDS []string) (info *DataInfo, err error) {
 
 	uri := fmt.Sprintf(videoDataURL, accessToken, openid)
 	req := &DataReq{
