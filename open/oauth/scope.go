@@ -2,62 +2,59 @@ package oauth
 
 import "strings"
 
-
 const (
-	// 用户相关
+	// 1.用户相关
 
-	// ScopeUserInfo 获取用户公开信息
-	ScopeUserInfo = "user_info"
-	// ScopeFansList 粉丝列表
-	ScopeFansList = "fans.list"
-	// ScopeFollowingList 关注列表
-	ScopeFollowingList = "following.list"
-	// ScopeFansData 查询创作者粉丝数据
-	ScopeFansData = "fans.data"
+	// 授权登录与用户基础信息
+	ScopeUserInfo = "user_info" // 获取用户公开信息
 
-	// 视频相关
+	// 关注和粉丝列表 搜索用户并获取用户公开信息和关注列表
+	ScopeFansList      = "fans.list"      // ScopeFansList 粉丝列表
+	ScopeFollowingList = "following.list" // 关注列表
+	ScopeFansCheck     = "fans.check"     // 检查关注
 
-	// ScopeVideoCreate 上传视频到文件服务器 - 创建抖音视频 -上传图片到文件服务器 - 发布图片
-	ScopeVideoCreate = "video.create"
-	// ScopeVideoList 列出已发布的视频
+	// 2.视频相关
+
+	// 视频查询
+	//可通过接口进行视频数据的查询
 	ScopeVideoList = "video.list"
-	// ScopeVideoData 查询指定视频数据
-	ScopeVideoData = "video.data"
-	// ScopeAwemeshare 抖音分享id机制
-	ScopeAwemeshare = "aweme.share"
-	// ScopeVideoDelete 删除抖音视频
-	ScopeVideoDelete = "video.delete"
-	// ScopeHotsearch 获取实时热点词 --获取热点词聚合的视频
-	ScopeHotsearch = "hotsearch"
+	ScopeVideoData = "video.data" // 查询指定视频数据
 
-	// 互动
+	//发布内容至抖音：APP场景
+	ScopeAwemeshare = "aweme.share" // 抖音分享id机制
 
-	// ScopeVideoComment 评论列表 ---评论回复列表 ---回复视频评论 ---置顶视频评论(企业号)
-	ScopeVideoComment = "video.comment"
-	// ScopeIm 给抖音用户发送消息  --- 上传素材
-	ScopeIm = "im"
+	//分享给抖音好友/群
+	ScopeImShare = "im.share" // 支持从第三方APP分享单图片或链接给抖音好友/群
+
+	// 3.数据权限
+	//视频数据
+	ScopeDataExternaltem = "data.external.item" //用户授权后，该接口可用于查询作品的获赞，评论，分享等相关数据
+	ScopeHotsearch       = "hotsearch"          // 获取实时热点词 --获取热点词聚合的视频
+
+	//测试应用白名单权限
+	ScopeTrialWhitelist = "trial.whitelist" //允许测试应用将用户添加进白名单
 )
 
 // GetUserScope 获取用户相关Scope.
 func GetUserScope() string {
-	scopes := []string{ScopeUserInfo, ScopeFansList, ScopeFollowingList, ScopeFansData}
+	scopes := []string{ScopeUserInfo, ScopeFansList, ScopeFollowingList, ScopeFansCheck}
 	return strings.Join(scopes, ",")
 }
 
 // GetVideoScope 获取视频相关Scope.
 func GetVideoScope() string {
-	scopes := []string{ScopeVideoCreate, ScopeVideoList, ScopeVideoData, ScopeAwemeshare, ScopeVideoDelete, ScopeHotsearch}
+	scopes := []string{ScopeVideoList, ScopeVideoData, ScopeAwemeshare, ScopeHotsearch, ScopeDataExternaltem}
 	return strings.Join(scopes, ",")
 }
 
 // GetInteractScope 获取互动相关Scope.
 func GetInteractScope() string {
-	scopes := []string{ScopeVideoComment, ScopeIm}
+	scopes := []string{ScopeImShare}
 	return strings.Join(scopes, ",")
 }
 
 // GetAllScope 获取所有Scope.
 func GetAllScope() string {
-	scopes := []string{GetInteractScope(), GetVideoScope(), GetUserScope()}
+	scopes := []string{GetInteractScope(), GetVideoScope(), GetUserScope(), ScopeTrialWhitelist}
 	return strings.Join(scopes, ",")
 }
