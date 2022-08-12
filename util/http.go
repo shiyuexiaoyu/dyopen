@@ -11,13 +11,25 @@ import (
 	"os"
 )
 
+func HTTPGet(uri string) ([]byte, error) {
+	return HTTPGetHeader(uri, map[string]string{})
+}
 
 // HTTPGet get 请求
-func HTTPGet(uri string) ([]byte, error) {
-	response, err := http.Get(uri)
+func HTTPGetHeader(uri string, headers map[string]string) ([]byte, error) {
+
+	client := &http.Client{}
+	request, err := http.NewRequest("GET", uri, nil)
+	if len(headers) > 0 {
+		for k, v := range headers {
+			request.Header.Add(k, v)
+		}
+	}
+
 	if err != nil {
 		return nil, err
 	}
+	response, _ := client.Do(request)
 
 	defer response.Body.Close()
 	if response.StatusCode != http.StatusOK {
