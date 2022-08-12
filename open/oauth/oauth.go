@@ -63,6 +63,7 @@ func (oauth *Oauth) GetUserAccessToken(code string) (accessToken credential.Acce
 	}
 	var result accessTokenRes
 	err = json.Unmarshal(response, &result)
+
 	if err != nil {
 		return
 	}
@@ -71,6 +72,7 @@ func (oauth *Oauth) GetUserAccessToken(code string) (accessToken credential.Acce
 		err = fmt.Errorf("GetUserAccessToken error : errcode=%v , errmsg=%v", result.Data.ErrCode, result.Data.ErrMsg)
 		return
 	}
+	accessToken = result.Data
 
 	err = oauth.SetAccessToken(&result.Data)
 	if err != nil {

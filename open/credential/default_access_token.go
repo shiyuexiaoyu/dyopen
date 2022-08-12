@@ -47,10 +47,13 @@ type AccessToken struct {
 	util.CommonError
 
 	AccessToken    string `json:"access_token"`
+	Captcha        string `json:"captcha"`
+	DescUrl        string `json:"desc_url"`
 	ExpiresIn      int64  `json:"expires_in"`
 	RefreshToken   string `json:"refresh_token"`
 	RefreshTokenIn int64  `json:"refresh_expires_in"`
-	OpenID         string `json:"openid"`
+	LogId          string `json:"log_id"`
+	OpenID         string `json:"open_id"`
 	Scope          string `json:"scope"`
 }
 
