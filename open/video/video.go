@@ -22,7 +22,7 @@ const (
 	// 删除视频
 	videoDeleteURL string = "https://open.douyin.com/video/delete?access_token=%s&open_id=%s"
 	// 视频列表
-	videoListURL string = "https://open.douyin.com/video/list?access_token=%s&open_id=%s&cursor=%d&count=%d"
+	videoListURL string = "https://open.douyin.com/video/list?open_id=%s&cursor=%d&count=%d"
 	// 视频数据
 	videoDataURL string = "https://open.douyin.com/video/data?access_token=%s&open_id=%s"
 )
@@ -57,7 +57,7 @@ type uploadVideoRes struct {
 
 // Upload 视频上传.
 // refer: https://open.douyin.com/platform/doc/6848798087398295555
-func (video *Video) Upload(openid,accessToken string, filename string) (videoInfo Info, err error) {
+func (video *Video) Upload(openid, accessToken string, filename string) (videoInfo Info, err error) {
 
 	uri := fmt.Sprintf(videoUploadURL, accessToken, openid)
 	var response []byte
@@ -93,7 +93,7 @@ type partInfoRes struct {
 
 // PartInit 初始化分片上传.
 // refer: https://open.douyin.com/platform/doc/6848798087398393859
-func (video *Video) PartInit(openid string,accessToken string) (partInfo PartInfo, err error) {
+func (video *Video) PartInit(openid string, accessToken string) (partInfo PartInfo, err error) {
 
 	uri := fmt.Sprintf(videoPartInitURL, accessToken, openid)
 	var response []byte
@@ -122,7 +122,7 @@ type partVideoRes struct {
 
 // PartUpload 视频分片上传.
 // refer: https://open.douyin.com/platform/doc/6848798087226460172
-func (video *Video) PartUpload(openid,accessToken string, uploadid string, partNumber int64, filename string) (err error) {
+func (video *Video) PartUpload(openid, accessToken string, uploadid string, partNumber int64, filename string) (err error) {
 
 	uri := fmt.Sprintf(videoPartUploadURL, accessToken, openid)
 
@@ -146,7 +146,7 @@ func (video *Video) PartUpload(openid,accessToken string, uploadid string, partN
 
 // PartComplete 视频分片完成上传.
 // refer: https://open.douyin.com/platform/doc/6848798087398361091
-func (video *Video) PartComplete(openid,accessToken string, uploadid string) (videoInfo Info, err error) {
+func (video *Video) PartComplete(openid, accessToken string, uploadid string) (videoInfo Info, err error) {
 
 	uri := fmt.Sprintf(videoPartCompleteURL, accessToken, openid, uploadid)
 	var response []byte
@@ -201,7 +201,7 @@ type createRes struct {
 
 // Create 视频创建.
 // refer: https://open.douyin.com/platform/doc/6848798087398328323
-func (video *Video) Create(openid string,accessToken string, videoInfo *CreateVideoReq) (info CreateInfo, err error) {
+func (video *Video) Create(openid string, accessToken string, videoInfo *CreateVideoReq) (info CreateInfo, err error) {
 
 	uri := fmt.Sprintf(videoCreateURL, accessToken, openid)
 	var response []byte
@@ -234,7 +234,7 @@ type deleteVideoRes struct {
 
 // Delete 视频删除
 // refer: https://open.douyin.com/platform/doc/6848806536383383560#url
-func (video *Video) Delete(openid,accessToken string, itemid string) (err error) {
+func (video *Video) Delete(openid, accessToken string, itemid string) (err error) {
 
 	uri := fmt.Sprintf(videoCreateURL, accessToken, openid)
 
@@ -268,6 +268,9 @@ type ListInfo struct {
 	Cursor  int64 `json:"cursor"`
 	HasMore bool  `json:"has_more"`
 	List    []struct {
+		IsTop      bool   `json:"is_top"`
+		ItemID     string `json:"item_id"`
+		MediaType  int `json:"media_type"`
 		Statistics struct {
 			CommentCount  int32 `json:"comment_count"`
 			DiggCount     int32 `json:"digg_count"`
@@ -276,13 +279,13 @@ type ListInfo struct {
 			PlayCount     int32 `json:"play_count"`
 			ShareCount    int32 `json:"share_count"`
 		} `json:"statistics"`
-		Title      string `json:"title"`
-		Cover      string `json:"cover"`
-		CreateTime int64  `json:"create_time"`
-		IsReviewed bool   `json:"is_reviewed"`
-		IsTop      bool   `json:"is_top"`
-		ItemID     string `json:"item_id"`
-		ShareURL   string `json:"share_url"`
+		VideoId     string `json:"video_id"`
+		VideoStatus int `json:"video_status"`
+		Cover       string `json:"cover"`
+		CreateTime  int64  `json:"create_time"`
+		IsReviewed  bool   `json:"is_reviewed"`
+		ShareURL    string `json:"share_url"`
+		Title       string `json:"title"`
 	} `json:"list"`
 }
 
@@ -292,10 +295,12 @@ type listInfoRes struct {
 }
 
 // List .
-func (video *Video) List(openid string,accessToken string, cursor, count int64) (info *ListInfo, err error) {
-	uri := fmt.Sprintf(videoListURL, accessToken, openid, cursor, count)
+func (video *Video) List(openid string, accessToken string, cursor, count int64) (info *ListInfo, err error) {
+	uri := fmt.Sprintf(videoListURL, openid, cursor, count)
 	var response []byte
-	response, err = util.HTTPGet(uri)
+	response, err = util.HTTPGetHeader(uri, map[string]string{
+		"access-token": accessToken,
+	})
 	if err != nil {
 		return
 	}
@@ -346,7 +351,7 @@ type dataInfoRes struct {
 }
 
 // Data .
-func (video *Video) Data(openid string,accessToken string, itemIDS []string) (info *DataInfo, err error) {
+func (video *Video) Data(openid string, accessToken string, itemIDS []string) (info *DataInfo, err error) {
 
 	uri := fmt.Sprintf(videoDataURL, accessToken, openid)
 	req := &DataReq{
